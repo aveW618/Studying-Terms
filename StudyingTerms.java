@@ -8,13 +8,11 @@ public class StudyingTerms {
 	//private instance variables
 	private String vocabTerm;
 	private String correctDefinition;
-	private int questionNumber;
 	
 	//writing a constructor to initialize the new objects
-	public StudyingTerms(String vt, String cd, int qn) {
+	public StudyingTerms(String vt, String cd) {
 		this.vocabTerm = vt;
 		this.correctDefinition = cd;
-		this.questionNumber = qn;
 	}
 	
 	//getters
@@ -24,10 +22,6 @@ public class StudyingTerms {
 	
 	public String getCorrectDefinition() {
 		return correctDefinition;
-	}
-	
-	public int getQuestionNumber() {
-		return questionNumber;
 	}
 	
 	
@@ -60,29 +54,33 @@ public class StudyingTerms {
 			String[] terms = data[0];
 			String[] definitions = data[1];
 			
-			termList.add(new StudyingTerms(terms, definitions, questionNum);
-			questionNum++;
+			termList.add(new StudyingTerms(terms, definitions);
 		}
 		scan.close();
+		return termList;
 			
 		//looping through the length of the array with the terms stored
 		for (int i = 0; i < termList.size(); i++) {
 				
 			//uses Math.random to get a random integer from 0 - the array length
-			int index = (Math.random() * terms.length);
-				
-			//increments the question number which will later be outputted to the user
-			questionNum++;
+			int index = (int)(Math.random() * termList.size());
 				
 			//stores the current term as the word in the terms array at the position of index
-			currentTerm = terms[index];
-				
+			String currentTerm = terms[index];
 			//same as the step above but stores the current defition as the words in the defition array at the position of index
-				currentDefition = definitions[index];
+			String currentDefition = definitions[index];
 				
-				//adds a term object to the termList ArrayList
-				termList.add(new QuizTerm(questionNum, currentTerm, currentDefinition));
-				
+			//outputs the randomized defition and asks the user for their input
+			System.out.println(currentDefition);
+			System.out.println("Your answer: ");
+			//stores user input
+			String userInput = input.nextLine();
+			
+			if (userInput.equalsIgnoreCase(currentTerm)) {
+				System.out.println("Correct!");
+			}
+			else {
+				System.out.println("Incorrect. The correct answer was: " + currentTerm + ".");
 			}
 		}
 	}
@@ -100,8 +98,8 @@ public static void main(String[] args) throws IOException {
 	
 	System.out.println("Please type the term corresponding with the given definition: ");
 
-	for (int i = 0; i < termList.size; i++) {
-			System.out.println("Question #" + questionNum + " " + 
+	for (int i = 0; i < termList.size(); i++) {
+			System.out.println("Question #" + (i + 1) + " " + 
 	
 			
 	
