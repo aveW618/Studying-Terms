@@ -30,7 +30,7 @@ public class StudyingTerms {
 	public static ArrayList <StudyingTerms> loadQuiz(String termFile) throws IOException {
 		//creating a new ArrayList of Objects 
 			//the objects will hold the question, the correct answer, three additional options, and the question number
-		Arraylist <StudyingTerms> termList = new ArrayList <StudyingTerms>();
+		ArrayList<StudyingTerms> termList = new ArrayList<StudyingTerms>();
 		
 		//file.io code which allows the file to be scanned
 		File myFile = new File(termFile);
@@ -51,28 +51,33 @@ public class StudyingTerms {
 			
 			//splits the test on its delimiters
 			String[] data = line.split("]");
-			String[] terms = data[0];
-			String[] definitions = data[1];
+			System.out.println(data[0]);
+			String terms = data[0];
+			String definitions = data[1];
 			
-			termList.add(new StudyingTerms(terms, definitions);
+			termList.add(new StudyingTerms(terms, definitions));
 		}
 		scan.close();
-		return termList;
 			
 		//looping through the length of the array with the terms stored
 		for (int i = 0; i < termList.size(); i++) {
 				
 			//uses Math.random to get a random integer from 0 - the array length
 			int index = (int)(Math.random() * termList.size());
-				
-			//stores the current term as the word in the terms array at the position of index
-			String currentTerm = terms[index];
-			//same as the step above but stores the current defition as the words in the defition array at the position of index
-			String currentDefition = definitions[index];
+			
+			StudyingTerms current = termList.get(index);
+			//stores the current term as the word in the current position of termList
+            String currentTerm = current.getVocabTerm();
+            //same as the step above but stores the current defition as the word in the current position of termList
+            String currentDefinition = current.getCorrectDefinition();
 				
 			//outputs the randomized defition and asks the user for their input
-			System.out.println(currentDefition);
+			System.out.println(currentDefinition);
 			System.out.println("Your answer: ");
+			
+			//reads input text from user
+			Scanner input = new Scanner(System.in);
+			
 			//stores user input
 			String userInput = input.nextLine();
 			
@@ -83,25 +88,16 @@ public class StudyingTerms {
 				System.out.println("Incorrect. The correct answer was: " + currentTerm + ".");
 			}
 		}
+		return termList;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		ArrayList<StudyingTerms> termQuiz = StudyingTerms.loadQuiz("unit1terms-2.txt");
+	
+		System.out.println("Please type the term corresponding with the given definition: ");
+
 	}
 }
-	
-
-//main method
-public static void main(String[] args) throws IOException {
-	ArrayList<StudyingTerms> termList = loadQuiz("unit1terms-2.txt");
-	//reads input text from user
-	Scanner input = new Scanner(System.in);
-	
-	//counter to track number of correct questions
-	int correct = 0;
-	
-	System.out.println("Please type the term corresponding with the given definition: ");
-
-	for (int i = 0; i < termList.size(); i++) {
-			System.out.println("Question #" + (i + 1) + " " + 
-	
-			
 	
 	
 	
